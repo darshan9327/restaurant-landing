@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savoria - Fine Dining Experience</title>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: #d4af37;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            animation: fadeInDown 1s;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s;
+        }
+
+        .cta-button {
+            padding: 1rem 3rem;
+            background: #d4af37;
+            color: #000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s;
+            animation: fadeInUp 1.2s;
+        }
+
+        .cta-button:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 5rem 5%;
+            background: #f8f8f8;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #d4af37;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 0.5rem;
+        }
+
+        .menu-item h3 {
+            font-size: 1.5rem;
+            color: #222;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .menu-item p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .dish-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        /* Chef Section */
+        .chef-section {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #222, #333);
+            color: #fff;
+        }
+
+        .chef-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .chef-image {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #d4af37, #555);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .chef-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+        }
+
+        .chef-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #ccc;
+        }
+
+        .chef-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .chef-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: #d4af37;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 5%;
+            background: #f8f8f8;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item h4 {
+            color: #222;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            color: #666;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #222;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #d4af37;
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #222;
+            color: #d4af37;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .chef-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Savoria</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#chef">Chef</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Savoria Restaurant</h1>
+        <p>Where Every Dish Tells a Story</p>
+        <a href="#menu" class="cta-button">Explore Menu</a>
+    </section>
+
+    <section class="menu-section" id="menu">
+        <h2 class="section-title">Our Signature Menu</h2>
+        <p class="section-subtitle">Handcrafted dishes prepared with passion and finest ingredients</p>
+        
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="dish-icon">🍝</div>
+                <div class="menu-item-header">
+                    <h3>Truffle Pasta</h3>
+                    <span class="price">$28</span>
+                </div>
+                <p>Homemade pasta tossed in creamy truffle sauce with wild mushrooms and parmesan shavings</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="dish-icon">🥩</div>
+                <div class="menu-item-header">
+                    <h3>Wagyu Steak</h3>
+                    <span class="price">$65</span>
+                </div>
+                <p>Premium A5 Wagyu beef cooked to perfection, served with roasted vegetables and red wine reduction</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="dish-icon">🦞</div>
+                <div class="menu-item-header">
+                    <h3>Lobster Thermidor</h3>
+                    <span class="price">$48</span>
+                </div>
+                <p>Fresh Maine lobster in a rich cognac cream sauce with gruyere cheese, gratinated to golden perfection</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="dish-icon">🍣</div>
+                <div class="menu-item-header">
+                    <h3>Sushi Platter</h3>
+                    <span class="price">$42</span>
+                </div>
+                <p>Chef's selection of 12 pieces featuring premium grade tuna, salmon, yellowtail and seasonal catches</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="dish-icon">🥗</div>
+                <div class="menu-item-header">
+                    <h3>Caesar Salad</h3>
+                    <span class="price">$18</span>
+                </div>
+                <p>Crisp romaine lettuce with house-made caesar dressing, garlic croutons and aged parmesan</p>
+            </div>
+
+            <div class="menu-item">
+                <div class="dish-icon">🍰</div>
+                <div class="menu-item-header">
+                    <h3>Chocolate Soufflé</h3>
+                    <span class="price">$14</span>
+                </div>
+                <p>Light and airy Belgian chocolate soufflé with vanilla bean ice cream and berry compote</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="chef-section" id="chef">
+        <div class="chef-container">
+            <div class="chef-image">👨‍🍳</div>
+            <div class="chef-content">
+                <h2>Meet Our Head Chef</h2>
+                <h3>Alessandro Rossi</h3>
+                <p>With over 20 years of culinary excellence, Chef Alessandro brings his passion for Italian-French fusion cuisine to every plate. Trained in the finest kitchens of Paris and Rome, he creates unforgettable dining experiences.</p>
+                <p>His philosophy is simple: use the freshest seasonal ingredients, respect traditional techniques, and never stop innovating. Each dish is a masterpiece that tells a story of heritage and creativity.</p>
+                
+                <div class="chef-stats">
+                    <div class="stat">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Michelin Stars</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Signature Dishes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">Visit Us</h2>
+        <p class="section-subtitle">We'd love to serve you an unforgettable meal</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4>Location</h4>
+                        <p>123 Gourmet Street<br>Downtown District<br>New York, NY 10001</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+1 (555) 123-4567<br>Reservations: +1 (555) 123-4568</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@savoria.com<br>reservations@savoria.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🕐</div>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>Monday - Friday: 11:00 AM - 11:00 PM<br>
+                        Saturday - Sunday: 10:00 AM - 12:00 AM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <h3>Make a Reservation</h3>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="+1 (555) 123-4567">
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date & Time</label>
+                    <input type="datetime-local" id="date">
+                </div>
+                <div class="form-group">
+                    <label for="message">Special Requests</label>
+                    <textarea id="message" placeholder="Any dietary restrictions or special occasions?"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Book Table</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Savoria Restaurant. All rights reserved.</p>
+        <p>Crafted with passion for fine dining</p>
+        <div class="social-links">
+            <a href="#">f</a>
+            <a href="#">🐦</a>
+            <a href="#">📷</a>
+            <a href="#">in</a>
+        </div>
+    </footer>
+</body>
+</html>
